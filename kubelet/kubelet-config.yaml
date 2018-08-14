@@ -1,0 +1,5 @@
+kind: KubeletConfiguration
+apiVersion: kubelet.config.k8s.io/v1beta1
+
+# 该字段后续将从命令行参数搬迁至配置文件
+cgroupDriver: systemd
