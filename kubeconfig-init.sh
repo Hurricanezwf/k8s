@@ -53,3 +53,6 @@ function _use_default_context(){
 		--kubeconfig=${__KUBECONFIG__}.gen \
 		use-context demo-for-zwf
 }
+
+
+kubeconfig_init

@@ -26,23 +26,25 @@ KUBELET_HOME=$K8S_SCRIPTS_HOME/kubelet
 # 不要移动该变量的位置
 __CERT_DIR__=${K8S_DATA_HOME}/certs
 
+__CONF_DIR__=${K8S_DATA_HOME}/configs
+
 
 ## ======================== kubeconfig generator ========================= ##
 
 # 生成的kubeconfig文件路径
-__KUBECONFIG__=$K8S_SCRIPTS_HOME/kubeconfig.yaml
+__KUBECONFIG__=${__CONF_DIR__}/kubeconfig.yaml
 
 # apiserver地址
 __KUBEAPISERVER__=https://192.168.2.102
 
 # apiserver证书路径
-__KUBEAPISERVER_CERT__=${__CERT_DIR__}/fake-ca-file
+__KUBEAPISERVER_CERT__=${__CERT_DIR__}/server.pem
 
 # 客户端密钥
-__CLIENT_KEY__=${__CERT_DIR__}/fake-client-key
+__CLIENT_KEY__=${__CERT_DIR__}/ca-key.pem
 
 # 客户端证书
-__CLIENT_CERT__=${__CERT_DIR__}/fake-client-cert
+__CLIENT_CERT__=${__CERT_DIR__}/ca.pem
 
 
 
