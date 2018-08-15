@@ -5,9 +5,6 @@ set -ex
 source ../env.sh
 
 
-# 存放证书的目录
-__CERT_DIR__=${SHARED_HOME}/certs
-
 # 当前主机一个网卡的IP
 __HOST_IP__=`ifconfig|grep '192.168.'|awk '{print $2}'`
 

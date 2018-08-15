@@ -2,4 +2,5 @@ kind: KubeletConfiguration
 apiVersion: kubelet.config.k8s.io/v1beta1
 
 # 该字段后续将从命令行参数搬迁至配置文件
+# 用`docker info | grep 'Cgroup Driver'`来查看docker的cgroupDriver然后做出配置
 cgroupDriver: systemd
