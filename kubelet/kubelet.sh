@@ -1,8 +1,8 @@
 #!/bin/sh
 
-set -ex
+set -e
 
-source ../env.sh
+source ${K8S_SCRIPTS_HOME}/env.sh
 
 
 # 准备启动环境

@@ -1,11 +1,24 @@
 #!/bin/sh
 
 
-K8S_SCRIPTS_HOME=/root/k8s-scripts
+if [ -z ${K8S_SCRIPTS_HOME} ];then
+	echo "ENV 'K8S_SCRIPTS_HOME' should be set"
+	exit -1
+fi
 
-K8S_BIN_HOME=/root/k8s-bin
+if [ -z ${K8S_BIN_HOME} ];then
+	echo "ENV 'K8S_BIN_HOME' should be set"
+	exit -1
+fi
 
-K8S_DATA_HOME=/root/k8s-data
+if [ -z ${K8S_DATA_HOME} ];then
+	echo "ENV 'K8S_DATA_HOME' should be set"
+fi
+
+
+
+
+
 
 KUBELET_HOME=$K8S_SCRIPTS_HOME/kubelet
 

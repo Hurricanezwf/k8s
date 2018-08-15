@@ -2,7 +2,7 @@
 
 set -e
 
-source ./env.sh
+source ${K8S_SCRIPTS_HOME}/env.sh
 
 # 初始化kubeconfig
 # 在这里定制你想要的集群信息
