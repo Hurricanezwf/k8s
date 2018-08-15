@@ -5,16 +5,7 @@ set -ex
 source ../env.sh
 
 
-# 当前主机一个网卡的IP
-__HOST_IP__=`ifconfig|grep '192.168.'|awk '{print $2}'`
-
-# 管理kubelet文件的目录
-__KUBELET_ROOT_DIR__=${K8S_DATA_HOME}/kubelet-root
-
-
-
-
-## 准备启动环境
+# 准备启动环境
 function prepare(){
 	# 关闭swap分区
 	swapoff -a
@@ -24,14 +15,16 @@ function prepare(){
 	mkdir -p ${__KUBELET_ROOT_DIR__}
 }
 
-## 启动kubelet
+# 启动kubelet
 function start(){
 	prepare
 	kubelet \
-		--config=./kubelet-config.yaml \
+		--config=${__KUBELET_CONFIG__} \
+		--kubeconfig=${__KUBECONFIG__} \
 		--cert-dir=${__CERT_DIR__} \
 		--node-ip=${__HOST_IP__} \
-		--root-dir=${__KUBELET_ROOT_DIR__}
+		--root-dir=${__KUBELET_ROOT_DIR__} \
+		-v 3
 
 	#--bootstrap-kubeconfig=TODO
 	#--cluster-domain=TODO

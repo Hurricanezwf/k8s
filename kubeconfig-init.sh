@@ -1,25 +1,8 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 source ./env.sh
-
-# 生成的kubeconfig文件路径
-__KUBECONFIG__=$K8S_SCRIPTS_HOME/kubeconfig.yaml
-
-# apiserver地址
-__KUBEAPISERVER__=https://192.168.2.102
-
-# apiserver证书路径
-__KUBEAPISERVER_CERT__=${__CERT_DIR__}/fake-ca-file
-
-# 客户端密钥
-__CLIENT_KEY__=${__CERT_DIR__}/fake-client-key
-
-# 客户端证书
-__CLIENT_CERT__=${__CERT_DIR__}/fake-client-cert
-
-
 
 # 初始化kubeconfig
 # 在这里定制你想要的集群信息
@@ -27,6 +10,7 @@ function kubeconfig_init(){
 	_init_clusters
 	_init_users
 	_init_contexts
+	_use_default_context
 	mv ${__KUBECONFIG__}.gen ${__KUBECONFIG__}
 }
 
@@ -61,4 +45,11 @@ function _init_contexts(){
 		--cluster=demo \
 		--user=zwf \
 		--namespace=ns-zwf
+}
+
+# 初始化使用默认context
+function _use_default_context(){
+	kubectl config \
+		--kubeconfig=${__KUBECONFIG__}.gen \
+		use-context demo-for-zwf
 }
