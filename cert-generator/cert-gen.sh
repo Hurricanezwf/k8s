@@ -13,6 +13,8 @@ function cert_init(){
 
 
 function _prepare_config(){
+	mkdir -p ${__CERT_DIR__}
+
 	# parepare ca-config.json
 	echo '{
 	"signing": {

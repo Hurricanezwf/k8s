@@ -18,7 +18,7 @@ fi
 
 
 
-__LOCAL_ADVERTISE_IP__=192.168.2.102
+__LOCAL_ADVERTISE_IP__=192.168.3.34
 
 
 KUBELET_HOME=$K8S_SCRIPTS_HOME/kubelet
@@ -63,3 +63,12 @@ __HOST_IP__=`ifconfig|grep '192.168.'|awk '{print $2}'`
 __KUBELET_ROOT_DIR__=${K8S_DATA_HOME}/kubelet-root
 
 
+
+
+
+
+
+## =============================== kube-apiserver ============================= ##
+
+# kube-apiserver数据根目录
+__KUBE_APISERVER_ROOT_DIR__=${K8S_DATA_HOME}/kube-apiserver-root
