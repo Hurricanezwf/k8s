@@ -28,12 +28,21 @@ function _prepare_config(){
           				"client auth"
         			],
         			"expiry": "8760h"
+      			},
+			"etcd": {
+        			"usages": [
+          				"signing",
+          				"key encipherment",
+          				"server auth",
+          				"client auth"
+        			],
+        			"expiry": "8760h"
       			}
     		}
 	}
 }'  > ${__CERT_DIR__}/ca-config.json
 
-	# parepare ca-csr.json
+	# parepare k8s-ca-csr.json for k8s
 	echo '{
 	"CN": "kubernetes",
 	"hosts": [
@@ -56,7 +65,27 @@ function _prepare_config(){
     		"O": "mmtrix",
     		"OU": "demo"
   	}]
-}' > ${__CERT_DIR__}/ca-csr.json
+}' > ${__CERT_DIR__}/k8s-ca-csr.json
+
+	# parepare etcd-ca-csr.json for etcd only
+	echo '{
+	"CN": "etcd",
+	"hosts": [
+		"127.0.0.1",
+		"192.168.2.102"
+	],
+	"key": {
+		"algo": "rsa",
+		"size": 2048
+	},
+  	"names":[{
+    		"C": "CN",
+    		"ST": "Shanghai",
+    		"L": "Shanghai",
+    		"O": "mmtrix",
+    		"OU": "etcd"
+  	}]
+}' > ${__CERT_DIR__}/etcd-ca-csr.json
 
 }
 
@@ -74,6 +103,11 @@ function _do_gen(){
 
 	# 执行生成命令
 	cd ${__CERT_DIR__}/
-	cfssl gencert -initca ca-csr.json | cfssljson -bare ca
-	cfssl gencert -ca=ca.pem -ca-key=ca-key.pem --config=ca-config.json -profile=kubernetes ca-csr.json | cfssljson -bare server
+	cfssl gencert -initca k8s-ca-csr.json | cfssljson -bare k8s-ca
+	cfssl gencert -ca=k8s-ca.pem -ca-key=k8s-ca-key.pem --config=ca-config.json -profile=kubernetes k8s-ca-csr.json  | cfssljson -bare k8s-server
+
+	cfssl gencert -initca etcd-ca-csr.json | cfssljson -bare etcd-ca
+	cfssl gencert -ca=etcd-ca.pem -ca-key=etcd-ca-key.pem --config=ca-config.json -profile=etcd etcd-ca-csr.json | cfssljson -bare etcd
 }
+
+cert_init
