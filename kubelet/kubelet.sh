@@ -33,6 +33,7 @@ function prepare(){
 function start(){
 	prepare
 	kubelet \
+		--hostname-override=kubelet \
 		--config=${__kubelet_config__} \
 		--kubeconfig=${__KUBECONFIG__} \
 		--tls-cert-file=${__tls_cert_file__} \

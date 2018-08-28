@@ -21,7 +21,8 @@ fi
 
 
 # 本地地址，非0.0.0.0
-__LOCAL_ADVERTISE_IP__=192.168.2.102
+#__LOCAL_ADVERTISE_IP__=192.168.2.102
+__LOCAL_ADVERTISE_IP__=192.168.3.34
 
 # 存放证书的目录
 # 不要移动该变量的位置

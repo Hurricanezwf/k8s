@@ -30,7 +30,10 @@ function start(){
 			--service-cluster-ip-range=10.0.0.0/24 \
 			--tls-cert-file=${__CERT_DIR__}/k8s-server.pem \
 			--tls-private-key-file=${__CERT_DIR__}/k8s-server-key.pem \
-			--admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota
+			--admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota
+
+
+	# admission-control的取值和含义可参考 https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 }
 
 

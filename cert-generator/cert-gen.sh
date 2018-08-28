@@ -22,7 +22,7 @@ function _prepare_config(){
 			"expiry": "8760h"
  		},
     		"profiles": {
-      			"kubernetes": {
+      			"k8s": {
         			"usages": [
           				"signing",
           				"key encipherment",
@@ -54,7 +54,11 @@ function _prepare_config(){
 		"kubernetes.default.svc",
 		"kubernetes.default.svc.cluster",
 		"kubernetes.default.svc.cluster.local",
-		"192.168.2.102"
+		"192.168.2.102",
+		"192.168.3.34",
+		"192.168.3.35",
+		"192.168.3.36",
+		"192.168.3.37"
 	],
 	"key": {
 		"algo": "rsa",
@@ -74,7 +78,11 @@ function _prepare_config(){
 	"CN": "etcd",
 	"hosts": [
 		"127.0.0.1",
-		"192.168.2.102"
+		"192.168.2.102",
+		"192.168.3.34",
+		"192.168.3.35",
+		"192.168.3.36",
+		"192.168.3.37"
 	],
 	"key": {
 		"algo": "rsa",
@@ -106,7 +114,7 @@ function _do_gen(){
 	# 执行生成命令
 	cd ${__CERT_DIR__}/
 	cfssl gencert -initca k8s-ca-csr.json | cfssljson -bare k8s-ca
-	cfssl gencert -ca=k8s-ca.pem -ca-key=k8s-ca-key.pem --config=ca-config.json -profile=kubernetes k8s-ca-csr.json  | cfssljson -bare k8s-server
+	cfssl gencert -ca=k8s-ca.pem -ca-key=k8s-ca-key.pem --config=ca-config.json -profile=k8s k8s-ca-csr.json  | cfssljson -bare k8s-server
 
 	cfssl gencert -initca etcd-ca-csr.json | cfssljson -bare etcd-ca
 	cfssl gencert -ca=etcd-ca.pem -ca-key=etcd-ca-key.pem --config=ca-config.json -profile=etcd etcd-ca-csr.json | cfssljson -bare etcd
