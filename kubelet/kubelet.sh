@@ -11,6 +11,12 @@ __kubelet_config__=${K8S_SCRIPTS_HOME}/kubelet/kubelet-config.yaml
 # 管理kubelet文件的目录
 __kubelet_root_dir__=${K8S_DATA_HOME}/kubelet-root
 
+# 证书
+__tls_cert_file__=${__CERT_DIR__}/k8s-server.pem
+
+# 私钥
+__tls_private_key_file__=${__CERT_DIR__}/k8s-server-key.pem
+
 
 
 # 准备启动环境
@@ -29,10 +35,11 @@ function start(){
 	kubelet \
 		--config=${__kubelet_config__} \
 		--kubeconfig=${__KUBECONFIG__} \
-		--cert-dir=${__CERT_DIR__} \
+		--tls-cert-file=${__tls_cert_file__} \
+		--tls-private-key-file=${__tls_private_key_file__} \
 		--node-ip=${__LOCAL_ADVERTISE_IP__} \
 		--root-dir=${__kubelet_root_dir__} \
-		-v 3
+		-v 10
 
 	#--bootstrap-kubeconfig=TODO
 	#--cluster-domain=TODO

@@ -30,7 +30,7 @@ function start(){
 			--service-cluster-ip-range=10.0.0.0/24 \
 			--tls-cert-file=${__CERT_DIR__}/k8s-server.pem \
 			--tls-private-key-file=${__CERT_DIR__}/k8s-server-key.pem \
-			--disable-admission-plugins=PersistentVolumeLabel 
+			--admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota
 }
 
 

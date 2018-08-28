@@ -17,9 +17,11 @@ fi
 
 
 
+                                                  ### 这里主要存放一些各个模块需要用到的共享变量 ###
+
+
 # 本地地址，非0.0.0.0
 __LOCAL_ADVERTISE_IP__=192.168.2.102
-
 
 # 存放证书的目录
 # 不要移动该变量的位置
@@ -27,3 +29,6 @@ __CERT_DIR__=${K8S_DATA_HOME}/certs
 
 # 存放脚本生成的配置的目录
 __CONF_DIR__=${K8S_DATA_HOME}/configs
+
+# 生成的kubeconfig文件路径
+__KUBECONFIG__=${__CONF_DIR__}/kubeconfig.yaml

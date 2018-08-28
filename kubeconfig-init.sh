@@ -6,19 +6,19 @@ source ${K8S_SCRIPTS_HOME}/env.sh
 
 
 # 生成的kubeconfig文件路径
-__kubeconfig__=${__CONF_DIR__}/kubeconfig.yaml
+__kubeconfig__=${__KUBECONFIG__}
 
 # apiserver地址
-__kube_apiserver__=https://${__LOCAL_ADVERTISE_IP__}
+__kube_apiserver__=https://${__LOCAL_ADVERTISE_IP__}:6443
 
-# apiserver证书路径
-__kube_apiserver_cert__=${__CERT_DIR__}/k8s-server.pem
+# CA
+__certificate_authority__=${__CERT_DIR__}/k8s-ca.pem
 
 # 客户端密钥
-__client_key__=${__CERT_DIR__}/k8s-ca-key.pem
+__client_key__=${__CERT_DIR__}/k8s-server-key.pem
 
 # 客户端证书
-__client_cert__=${__CERT_DIR__}/k8s-ca.pem
+__client_cert__=${__CERT_DIR__}/k8s-server.pem
 
 
 
@@ -39,7 +39,7 @@ function _init_clusters(){
 		--kubeconfig=${__kubeconfig__}.gen \
 		set-cluster demo \
 		--server=${__kube_apiserver__} \
-		--certificate-authority=${__kube_apiserver_cert__}
+		--certificate-authority=${__certificate_authority__}
 		#--embed-certs=true
 }
 
@@ -52,24 +52,39 @@ function _init_users(){
 		--client-key=${__client_key__} \
 		--client-certificate=${__client_cert__}
 		#--embed-certs=true
+
+	kubectl config \
+		--kubeconfig=${__kubeconfig__}.gen \
+		set-credentials kubernetes \
+		--client-key=${__client_key__} \
+		--client-certificate=${__client_cert__}
+		#--embed-certs=true
+
 }
 
 
 # 初始化上下文信息
 function _init_contexts(){
+	#kubectl config \
+	#	--kubeconfig=${__kubeconfig__}.gen \
+	#	set-context demo-for-zwf \
+	#	--cluster=demo \
+	#	--user=zwf \
+	#	--namespace=ns-zwf
+
 	kubectl config \
 		--kubeconfig=${__kubeconfig__}.gen \
-		set-context demo-for-zwf \
+		set-context demo \
 		--cluster=demo \
-		--user=zwf \
-		--namespace=ns-zwf
+		--user=kubernetes \
+		--namespace=default
 }
 
 # 初始化使用默认context
 function _use_default_context(){
 	kubectl config \
 		--kubeconfig=${__kubeconfig__}.gen \
-		use-context demo-for-zwf
+		use-context demo
 }
 
 
