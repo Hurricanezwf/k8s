@@ -92,10 +92,10 @@ client-transport-security:
   ca-file: 
 
   # Path to the client server TLS cert file.
-  cert-file: /root/k8s-data/certs/ca.pem
+  cert-file: /root/k8s-data/certs/etcd-ca.pem
 
   # Path to the client server TLS key file.
-  key-file: /root/k8s-data/certs/ca-key.pem
+  key-file: /root/k8s-data/certs/etcd-ca-key.pem
 
   # Enable client cert authentication.
   client-cert-auth: false
