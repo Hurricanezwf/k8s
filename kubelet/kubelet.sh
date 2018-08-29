@@ -22,7 +22,7 @@ __tls_private_key_file__=${__CERT_DIR__}/k8s-server-key.pem
 # 准备启动环境
 function prepare(){
 	# 关闭swap分区
-	swapoff -a
+	sudo swapoff -a
 
 	# 创建目录
 	mkdir -p ${__CERT_DIR__}
@@ -32,8 +32,7 @@ function prepare(){
 # 启动kubelet
 function start(){
 	prepare
-	kubelet \
-		--hostname-override=kubelet \
+	sudo kubelet \
 		--config=${__kubelet_config__} \
 		--kubeconfig=${__KUBECONFIG__} \
 		--tls-cert-file=${__tls_cert_file__} \

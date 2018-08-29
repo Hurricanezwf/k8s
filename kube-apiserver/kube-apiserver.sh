@@ -19,8 +19,8 @@ function start(){
 			--audit-log-path=${__kube_apiserver_root_dir__}/logs/kube-apiserver-audit.log \
 			--authorization-mode=Node,RBAC \
 			--bind-address=${__LOCAL_ADVERTISE_IP__} \
-			--client-ca-file=${__CERT_DIR__}/k8s-ca.pem \
-			--etcd-cafile=${__CERT_DIR__}/etcd-ca.pem \
+			--client-ca-file=${__CERT_DIR__}/ca.pem \
+			--etcd-cafile=${__CERT_DIR__}/ca.pem \
 			--etcd-certfile=${__CERT_DIR__}/etcd.pem \
 			--etcd-keyfile=${__CERT_DIR__}/etcd-key.pem \
 			--etcd-servers=https:\/\/${__LOCAL_ADVERTISE_IP__}:2379 \

@@ -25,11 +25,11 @@ function start(){
 		--cert-file=${__CERT_DIR__}/etcd.pem \
 		--key-file=${__CERT_DIR__}/etcd-key.pem \
 		--client-cert-auth=true \
-		--trusted-ca-file=${__CERT_DIR__}/etcd-ca.pem \
+		--trusted-ca-file=${__CERT_DIR__}/ca.pem \
 		--peer-cert-file=${__CERT_DIR__}/etcd.pem \
 		--peer-key-file=${__CERT_DIR__}/etcd-key.pem \
 		--peer-client-cert-auth=true \
-		--peer-trusted-ca-file=${__CERT_DIR__}/etcd-ca.pem
+		--peer-trusted-ca-file=${__CERT_DIR__}/ca.pem
 }
 
 
