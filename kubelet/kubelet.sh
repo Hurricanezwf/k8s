@@ -39,7 +39,9 @@ function start(){
 		--tls-private-key-file=${__tls_private_key_file__} \
 		--node-ip=${__LOCAL_ADVERTISE_IP__} \
 		--root-dir=${__kubelet_root_dir__} \
-		-v 10
+		--runtime-cgroups=/systemd/system.slice \
+		--kubelet-cgroups=/systemd/system.slice \
+		-v 2
 
 	#--bootstrap-kubeconfig=TODO
 	#--cluster-domain=TODO

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 source ${K8S_SCRIPTS_HOME}/env.sh
 
