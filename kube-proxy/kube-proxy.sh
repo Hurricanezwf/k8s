@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 
 source ${K8S_SCRIPTS_HOME}/env.sh
 
@@ -11,6 +10,7 @@ __config__=${__CONF_DIR__}/kube-proxy-config.yaml
 
 
 function init() {
+	# 生成配置
 	if [ ! -f ${__tpl__} ];then
 		echo "${__tpl__} not found"
 		exit -1
@@ -18,11 +18,21 @@ function init() {
 
 	cp ${__tpl__} ${__config__}
 	sed -i "s#{__KUBECONFIG__}#${__KUBECONFIG__}#g" ${__config__}
+
+	# 安装ipset命令
+	hash ipset 2>/dev/null
+	if [ "$?"x == "1"x ];then
+		sudo yum -y install ipset
+	fi
 }
 
 
 function start() {
-	kube-proxy --config=${__config__}
+	if [ ! -f ${__config__} ];then
+		init
+	fi
+
+	sudo kube-proxy --config=${__config__}
 }
 
 
