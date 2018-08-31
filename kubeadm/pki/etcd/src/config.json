@@ -1,0 +1,19 @@
+{
+    "CN": "node1",
+    "hosts": [
+	"node1",
+	"192.168.2.105"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "China",
+            "ST": "Shanghai",
+            "L": "Shanghai"
+        }
+    ]
+}
+
