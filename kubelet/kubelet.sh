@@ -33,6 +33,7 @@ function prepare(){
 function start(){
 	prepare
 	sudo kubelet \
+		-v=2 \
 		--config=${__kubelet_config__} \
 		--kubeconfig=${__KUBECONFIG__} \
 		--tls-cert-file=${__tls_cert_file__} \
@@ -40,8 +41,7 @@ function start(){
 		--node-ip=${__LOCAL_ADVERTISE_IP__} \
 		--root-dir=${__kubelet_root_dir__} \
 		--runtime-cgroups=/systemd/system.slice \
-		--kubelet-cgroups=/systemd/system.slice \
-		-v 2
+		--kubelet-cgroups=/systemd/system.slice
 
 	#--bootstrap-kubeconfig=TODO
 	#--cluster-domain=TODO
